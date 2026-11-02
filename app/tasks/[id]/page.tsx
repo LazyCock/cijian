@@ -7,6 +7,7 @@ import { daysLeft, money, statusLabel } from "@/lib/format";
 import { Avatar } from "@/components/Avatar";
 import { Icon } from "@/components/Icon";
 import { TaskApplyForm } from "@/components/TaskApplyForm";
+import { MediaGallery } from "@/components/MediaGallery";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -44,6 +45,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
           <section className="task-detail-section">
             <h2>需求说明</h2>
             <p>{task.description}</p>
+            <MediaGallery items={task.media} compact />
           </section>
           <section className="task-detail-section">
             <h2>交付物</h2>

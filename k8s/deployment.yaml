@@ -74,6 +74,9 @@ spec:
                 name: qiongzhi-config
             - secretRef:
                 name: qiongzhi-secrets
+          env:
+            - name: UPLOAD_DIR
+              value: /app/.data/uploads
           resources:
             requests:
               cpu: "500m"
@@ -111,10 +114,14 @@ spec:
               mountPath: /tmp
             - name: next-cache
               mountPath: /app/.next/cache
+            - name: uploads
+              mountPath: /app/.data/uploads
       volumes:
         - name: tmp
           emptyDir: {}
         - name: next-cache
+          emptyDir: {}
+        - name: uploads
           emptyDir: {}
 ---
 apiVersion: v1

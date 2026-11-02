@@ -22,11 +22,14 @@ CREATE TABLE IF NOT EXISTS posts (
   type text NOT NULL DEFAULT 'work' CHECK (type IN ('work', 'note', 'question')),
   cover text NOT NULL DEFAULT 'film' CHECK (cover IN ('film', 'brand', 'prompt', 'question')),
   tags text[] NOT NULL DEFAULT '{}',
+  media jsonb NOT NULL DEFAULT '[]'::jsonb,
   featured boolean NOT NULL DEFAULT false,
   like_count integer NOT NULL DEFAULT 0,
   comment_count integer NOT NULL DEFAULT 0,
   created_at timestamptz NOT NULL DEFAULT now()
 );
+
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS media jsonb NOT NULL DEFAULT '[]'::jsonb;
 
 CREATE INDEX IF NOT EXISTS posts_created_idx ON posts (created_at DESC, id DESC);
 CREATE INDEX IF NOT EXISTS posts_featured_idx ON posts (featured, created_at DESC);
@@ -77,8 +80,11 @@ CREATE TABLE IF NOT EXISTS tasks (
   status text NOT NULL DEFAULT 'open' CHECK (status IN ('open', 'in_progress', 'submitted', 'completed', 'cancelled')),
   slots integer NOT NULL DEFAULT 1 CHECK (slots > 0),
   tags text[] NOT NULL DEFAULT '{}',
+  media jsonb NOT NULL DEFAULT '[]'::jsonb,
   created_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE tasks ADD COLUMN IF NOT EXISTS media jsonb NOT NULL DEFAULT '[]'::jsonb;
+
 CREATE INDEX IF NOT EXISTS tasks_open_idx ON tasks (status, created_at DESC) WHERE status = 'open';
 CREATE INDEX IF NOT EXISTS tasks_category_idx ON tasks (category, created_at DESC);
 CREATE INDEX IF NOT EXISTS tasks_publisher_idx ON tasks (publisher_id, created_at DESC);

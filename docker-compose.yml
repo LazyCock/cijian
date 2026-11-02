@@ -45,6 +45,9 @@ services:
       AUTO_MIGRATE: "true"
       SEED_DEMO: ${SEED_DEMO:-false}
       PG_POOL_MAX: "20"
+      UPLOAD_DIR: /app/.data/uploads
+    volumes:
+      - uploads:/app/.data/uploads
     depends_on:
       postgres:
         condition: service_healthy
@@ -73,3 +76,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  uploads:

@@ -9,3 +9,4 @@ coverage
 *.tsbuildinfo
 logs/
 qiongzhi-app-*.png
+tools/

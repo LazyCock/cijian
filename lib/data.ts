@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { query } from "@/db";
 import { cached, invalidate } from "./cache";
+import type { MediaItem } from "./media-types";
 
 export type Post = {
   id: string;
@@ -9,6 +10,7 @@ export type Post = {
   type: "work" | "note" | "question";
   cover: "film" | "brand" | "prompt" | "question";
   tags: string[];
+  media: MediaItem[];
   featured: boolean;
   likeCount: number;
   commentCount: number;
@@ -41,6 +43,7 @@ export type Task = {
   status: "open" | "in_progress" | "submitted" | "completed" | "cancelled";
   slots: number;
   tags: string[];
+  media: MediaItem[];
   createdAt: string;
   applicantCount: number;
   publisher: {
@@ -67,7 +70,7 @@ export type Profile = {
 };
 
 const POST_COLUMNS = `
-  p.id, p.title, p.body, p.type, p.cover, p.tags, p.featured,
+  p.id, p.title, p.body, p.type, p.cover, p.tags, p.media, p.featured,
   p.like_count, p.comment_count, p.created_at,
   u.id AS author_id, u.name AS author_name, u.handle AS author_handle,
   u.avatar_url AS author_avatar, u.bio AS author_bio
@@ -80,6 +83,7 @@ type PostRow = {
   type: Post["type"];
   cover: Post["cover"];
   tags: string[];
+  media: unknown;
   featured: boolean;
   like_count: number;
   comment_count: number;
@@ -91,6 +95,19 @@ type PostRow = {
   author_bio: string;
 };
 
+function normalizeMedia(value: unknown): MediaItem[] {
+  if (Array.isArray(value)) return value as MediaItem[];
+  if (typeof value === "string") {
+    try {
+      const parsed = JSON.parse(value);
+      return Array.isArray(parsed) ? (parsed as MediaItem[]) : [];
+    } catch {
+      return [];
+    }
+  }
+  return [];
+}
+
 function mapPost(row: PostRow): Post {
   return {
     id: row.id,
@@ -99,6 +116,7 @@ function mapPost(row: PostRow): Post {
     type: row.type,
     cover: row.cover,
     tags: row.tags ?? [],
+    media: normalizeMedia(row.media),
     featured: row.featured,
     likeCount: Number(row.like_count),
     commentCount: Number(row.comment_count),
@@ -290,13 +308,13 @@ export async function addComment(postId: string, userId: string, body: string) {
 }
 
 export async function createPost(input: {
-  authorId: string; title: string; body: string; type: Post["type"]; cover: Post["cover"]; tags: string[]; featured?: boolean;
+  authorId: string; title: string; body: string; type: Post["type"]; cover: Post["cover"]; tags: string[]; media?: MediaItem[]; featured?: boolean;
 }) {
   const id = randomUUID();
   await query(
-    `INSERT INTO posts (id,author_id,title,body,type,cover,tags,featured)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
-    [id, input.authorId, input.title, input.body, input.type, input.cover, input.tags, input.featured ?? false],
+    `INSERT INTO posts (id,author_id,title,body,type,cover,tags,media,featured)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9)`,
+    [id, input.authorId, input.title, input.body, input.type, input.cover, input.tags, JSON.stringify(input.media ?? []), input.featured ?? false],
   );
   await invalidate("home:featured:v1");
   return getPost(id, input.authorId);
@@ -304,14 +322,14 @@ export async function createPost(input: {
 
 const TASK_COLUMNS = `
   t.id, t.title, t.description, t.category, t.budget_cents, t.deadline, t.status,
-  t.slots, t.tags, t.created_at,
+  t.slots, t.tags, t.media, t.created_at,
   u.id AS publisher_id, u.name AS publisher_name, u.handle AS publisher_handle, u.avatar_url AS publisher_avatar,
   (SELECT count(*)::int FROM task_applications a WHERE a.task_id = t.id AND a.status <> 'withdrawn') AS applicant_count
 `;
 
 type TaskRow = {
   id: string; title: string; description: string; category: string; budget_cents: number;
-  deadline: string | Date; status: Task["status"]; slots: number; tags: string[]; created_at: string | Date;
+  deadline: string | Date; status: Task["status"]; slots: number; tags: string[]; media: unknown; created_at: string | Date;
   publisher_id: string; publisher_name: string; publisher_handle: string; publisher_avatar: string | null;
   applicant_count: number;
 };
@@ -327,6 +345,7 @@ function mapTask(row: TaskRow): Task {
     status: row.status,
     slots: Number(row.slots),
     tags: row.tags ?? [],
+    media: normalizeMedia(row.media),
     createdAt: new Date(row.created_at).toISOString(),
     applicantCount: Number(row.applicant_count ?? 0),
     publisher: {
@@ -401,13 +420,13 @@ export async function getHomeTasks(): Promise<Task[]> {
 
 export async function createTask(input: {
   publisherId: string; title: string; description: string; category: string;
-  budget: number; deadline: string; slots: number; tags: string[];
+  budget: number; deadline: string; slots: number; tags: string[]; media?: MediaItem[];
 }) {
   const id = randomUUID();
   await query(
-    `INSERT INTO tasks (id,publisher_id,title,description,category,budget_cents,deadline,slots,tags)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
-    [id, input.publisherId, input.title, input.description, input.category, input.budget * 100, input.deadline, input.slots, input.tags],
+    `INSERT INTO tasks (id,publisher_id,title,description,category,budget_cents,deadline,slots,tags,media)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10::jsonb)`,
+    [id, input.publisherId, input.title, input.description, input.category, input.budget * 100, input.deadline, input.slots, input.tags, JSON.stringify(input.media ?? [])],
   );
   await invalidate("home:tasks:v1");
   return getTask(id);

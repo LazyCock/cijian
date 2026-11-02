@@ -8,6 +8,7 @@ import { Avatar } from "@/components/Avatar";
 import { Icon } from "@/components/Icon";
 import { PostActions } from "@/components/PostActions";
 import { PostCover } from "@/components/PostCover";
+import { MediaGallery } from "@/components/MediaGallery";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -41,6 +42,8 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
         </div>
 
         <div className="post-detail-cover"><PostCover post={post} /></div>
+
+        {post.media.length > 0 && <MediaGallery items={post.media} />}
 
         <div className="post-detail-body">
           <p>{post.body}</p>

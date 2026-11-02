@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { MediaPicker } from "./MediaPicker";
+import type { MediaItem } from "@/lib/media-types";
 
 const covers = [
   ["film", "AI 影像 / 电影感"],
@@ -17,6 +19,7 @@ export function CreatePostForm() {
   const [type, setType] = useState("work");
   const [cover, setCover] = useState("film");
   const [tags, setTags] = useState("");
+  const [media, setMedia] = useState<MediaItem[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -34,6 +37,7 @@ export function CreatePostForm() {
           type,
           cover,
           tags: tags.split(/[，,、]/).map((value) => value.trim()).filter(Boolean).slice(0, 5),
+          media,
         }),
       });
       const data = await response.json().catch(() => ({}));
@@ -59,6 +63,7 @@ export function CreatePostForm() {
         <div className="field"><label htmlFor="post-cover">封面样式</label><select id="post-cover" value={cover} onChange={(event) => setCover(event.target.value)}>{covers.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div>
       </div>
       <div className="field"><label htmlFor="post-tags">话题标签 <span>用逗号分隔，最多 5 个</span></label><input id="post-tags" value={tags} onChange={(event) => setTags(event.target.value)} placeholder="提示词工程, 品牌视觉, 工作流" /></div>
+      <MediaPicker value={media} onChange={setMedia} />
       {error && <p className="form-error">{error}</p>}
       <div className="form-actions"><button className="btn btn-dark" type="submit" disabled={loading}>{loading ? "发布中…" : "发布作品"}</button><span className="form-help">发布后会进入社区与个人主页</span></div>
     </form>

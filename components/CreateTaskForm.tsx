@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { MediaPicker } from "./MediaPicker";
+import type { MediaItem } from "@/lib/media-types";
 
 const categories = ["内容创作", "视频生成", "视觉设计", "Agent 开发", "模型微调", "数据服务"];
 
@@ -14,6 +16,7 @@ export function CreateTaskForm() {
   const [deadline, setDeadline] = useState("");
   const [slots, setSlots] = useState("1");
   const [tags, setTags] = useState("");
+  const [media, setMedia] = useState<MediaItem[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -33,6 +36,7 @@ export function CreateTaskForm() {
           deadline,
           slots: Number(slots),
           tags: tags.split(/[，,、]/).map((value) => value.trim()).filter(Boolean).slice(0, 6),
+          media,
         }),
       });
       const data = await response.json().catch(() => ({}));
@@ -62,6 +66,7 @@ export function CreateTaskForm() {
         <div className="field"><label htmlFor="task-slots">招募人数</label><input id="task-slots" type="number" min={1} max={20} value={slots} onChange={(event) => setSlots(event.target.value)} required /></div>
       </div>
       <div className="field"><label htmlFor="task-tags">技能标签 <span>用逗号分隔，最多 6 个</span></label><input id="task-tags" value={tags} onChange={(event) => setTags(event.target.value)} placeholder="Runway, 分镜, 品牌短片" /></div>
+      <MediaPicker value={media} onChange={setMedia} />
       {error && <p className="form-error">{error}</p>}
       <div className="form-actions"><button className="btn btn-dark" type="submit" disabled={loading}>{loading ? "发布中…" : "发布任务"}</button><span className="form-help">发布即表示同意平台协作规则</span></div>
     </form>
