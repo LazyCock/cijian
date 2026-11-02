@@ -1,0 +1,13 @@
+{
+	email admin@cijianai.com
+}
+
+cijianai.com, www.cijianai.com {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:3000 {
+		header_up Host {host}
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	}
+}

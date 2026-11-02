@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qiongzhi-web
+  namespace: qiongzhi
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "3m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/limit-rps: "40"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "3"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: ["qiongzhi.example.com"]
+      secretName: qiongzhi-tls
+  rules:
+    - host: qiongzhi.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: qiongzhi-web
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: qiongzhi-web-default-deny
+  namespace: qiongzhi
+spec:
+  podSelector:
+    matchLabels:
+      app: qiongzhi-web
+  policyTypes: ["Ingress"]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 3000

@@ -1,0 +1,11 @@
+node_modules
+.next
+.data
+.git
+.env
+.env.local
+*.md
+*.png
+.tmp-*
+scripts/e2e*.mjs
+scripts/*debug*.mjs
