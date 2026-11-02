@@ -19,7 +19,7 @@ export default async function HomePage() {
     <div className="home-page">
       <section className="md-hero" aria-labelledby="mdHeroTitle">
         <div className="md-stars" aria-hidden="true" />
-        <div className="md-ghost-word" aria-hidden="true">QIONGZHI</div>
+        <div className="md-ghost-word" aria-hidden="true">CIJIAN</div>
         <div className="md-eclipse" aria-hidden="true"><span className="md-eclipse-rim" /><span className="md-eclipse-glow" /></div>
         <div className="md-hero-inner">
           <div className="md-kicker"><span className="md-pulse" />OPEN AI PRACTICE NETWORK · 2026</div>
@@ -108,7 +108,7 @@ export default async function HomePage() {
 
         <section className="home-section home-academy" aria-labelledby="homeAcademyTitle" style={{ marginTop: 104 }}>
           <div className="home-academy-copy">
-            <div className="home-section-kicker">QIONGZHI ACADEMY / COHORT 07</div>
+            <div className="home-section-kicker">CIJIAN ACADEMY / COHORT 07</div>
             <h2 id="homeAcademyTitle">学会用 AI，<br /><span>更像一个方法。</span></h2>
           </div>
           <div className="home-academy-body">

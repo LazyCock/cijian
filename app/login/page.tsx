@@ -16,7 +16,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <div className="auth-shell">
       <div className="auth-aside">
         <span className="auth-orb" aria-hidden="true" />
-        <div className="eyebrow">QIONGZHI / PRACTICE NETWORK</div>
+        <div className="eyebrow">CIJIAN / PRACTICE NETWORK</div>
         <h1>把能力，<br /><span>放回现场。</span></h1>
         <p>这不是一个只收藏灵感的地方。发布你的方法，接下真实的任务，在公开协作里把 AI 用成一套可以交付的能力。</p>
         <div className="auth-points"><span>真实任务</span><span>平台托管</span><span>公开协作</span><span>可验证成果</span></div>

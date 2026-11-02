@@ -28,7 +28,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ handle
       <section className="profile-cover">
         <div className="profile-orb" aria-hidden="true" />
         <div className="profile-orbit" aria-hidden="true" />
-        <div className="profile-topline"><span>PROFILE / 个人主页</span><span>QIONGZHI ID · {profile.id.slice(0, 5).toUpperCase()} · {profile.location}</span></div>
+        <div className="profile-topline"><span>PROFILE / 个人主页</span><span>CIJIAN ID · {profile.id.slice(0, 5).toUpperCase()} · {profile.location}</span></div>
         <div className="profile-identity">
           <span className="profile-avatar"><Avatar name={profile.name} handle={profile.handle} url={profile.avatarUrl} size={82} /></span>
           <div className="profile-copy">

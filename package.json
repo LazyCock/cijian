@@ -1,8 +1,8 @@
 {
-  "name": "qiongzhi-site",
+  "name": "cijian-site",
   "version": "0.1.0",
   "private": true,
-  "description": "穹智 QIONGZHI — production AI practice community and task marketplace",
+  "description": "此见 CIJIAN — production AI practice community and task marketplace",
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",

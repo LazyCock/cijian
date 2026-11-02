@@ -65,9 +65,9 @@ export function SiteHeader({ user }: { user: HeaderUser | null }) {
     <>
       <header className={`topbar ${scrolled ? "scrolled" : ""}`}>
         <div className="topbar-inner">
-          <Link className="brand" href="/" aria-label="穹智首页">
+          <Link className="brand" href="/" aria-label="此见首页">
             <span className="logo-mark"><Icon name="i-moon" /></span>
-            <span className="brand-copy"><span className="brand-name">穹智</span><span className="brand-en">QIONGZHI</span></span>
+            <span className="brand-copy"><span className="brand-name">此见</span><span className="brand-en">CIJIAN</span></span>
           </Link>
 
           <nav className="main-nav" aria-label="主导航">

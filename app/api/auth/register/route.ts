@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     `INSERT INTO users (id,email,password_hash,name,handle,bio)
      VALUES ($1,$2,$3,$4,$5,$6)
      RETURNING id,email,name,handle,avatar_url,bio,location,website,role,token_version`,
-    [id, email, hash, name, handle, "刚刚加入穹智，正在把 AI 放进自己的工作流。"],
+    [id, email, hash, name, handle, "刚刚加入此见，正在把 AI 放进自己的工作流。"],
   );
   const row = rows[0];
   const user: AuthUser = {

@@ -151,7 +151,7 @@ export function PostActions({
         </div>
         <div className="modal-body">
           <div className="modal-summary">
-            <Avatar name="穹智社区" size={36} />
+            <Avatar name="此见社区" size={36} />
             <div><b>{title}</b><span>社区讨论 · {commentCount} 条讨论</span></div>
           </div>
           {error && <p className="form-error">{error}</p>}

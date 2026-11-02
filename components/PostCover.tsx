@@ -17,7 +17,7 @@ export function PostCover({ post }: { post: Post }) {
         <span className="cover-kicker">{labels[post.cover]}</span>
         <span className="cover-title">{post.title.split("：")[0].slice(0, 12)}</span>
         <span className="cover-mark">{mark}</span>
-        <span className="cover-meta">QIONGZHI / SELECTED</span>
+        <span className="cover-meta">CIJIAN / SELECTED</span>
       </div>
     );
   }
@@ -26,7 +26,7 @@ export function PostCover({ post }: { post: Post }) {
       <span className="cover-kicker">{labels[post.cover]}</span>
       <span className="cover-title">{post.title.split("：")[0].slice(0, 12)}</span>
       <span className="cover-mark">{mark}</span>
-      <span className="cover-meta">QIONGZHI / SELECTED</span>
+      <span className="cover-meta">CIJIAN / SELECTED</span>
     </div>
   );
 }

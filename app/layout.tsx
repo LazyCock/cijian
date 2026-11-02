@@ -9,11 +9,11 @@ import { IconSprite } from "@/components/IconSprite";
 
 export const metadata: Metadata = {
   title: {
-    default: "穹智 QIONGZHI · AI 应用与协作社区",
-    template: "%s · 穹智 QIONGZHI",
+    default: "此见 CIJIAN · AI 应用与协作社区",
+    template: "%s · 此见 CIJIAN",
   },
   description: "在真实项目里学习，在公开协作中生长。AI 应用、任务协作与实践社区。",
-  applicationName: "穹智",
+  applicationName: "此见",
 };
 
 export const viewport: Viewport = {

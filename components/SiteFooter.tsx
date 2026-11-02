@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="footer-brand">
         <span className="logo-mark"><Icon name="i-moon" /></span>
-        <span>穹智 QIONGZHI · AI 应用与协作社区</span>
+        <span>此见 CIJIAN · AI 应用与协作社区</span>
       </div>
       <div className="footer-links">
         <Link href="/">关于</Link>

@@ -36,7 +36,7 @@ function CardArt({ post }: { post: Post }) {
     return (
       <div className="showcase-card-art brand-art" aria-hidden="true">
         <div className="sc-brand-main">
-          <div className="sc-brand-top"><span>QIONGZHI®</span><span>SELECTED / 2026</span></div>
+          <div className="sc-brand-top"><span>CIJIAN®</span><span>SELECTED / 2026</span></div>
           <b>{post.title.slice(0, 1)}</b>
           <div className="sc-brand-bottom"><span>{post.tags[0] || "品牌视觉"}</span><small>BRAND SYSTEM / 01</small></div>
         </div>
@@ -129,7 +129,7 @@ export function CommunityShowcase({ posts, isAuthenticated }: { posts: Post[]; i
             <span>VIEW WORK</span>
           </Link>
           <div className="showcase-feature-copy">
-            <div className="showcase-overline">{lead.cover === "film" ? "BETWEEN MOUNTAINS AND SEA" : "QIONGZHI / SELECTED"}</div>
+            <div className="showcase-overline">{lead.cover === "film" ? "BETWEEN MOUNTAINS AND SEA" : "CIJIAN / SELECTED"}</div>
             <h3><Link href={`/p/${lead.id}`}>{coverTitle(lead.title)}</Link></h3>
             <p>{excerpt(lead.body, 120)}</p>
             <div className="showcase-byline">
@@ -187,7 +187,7 @@ export function CommunityShowcase({ posts, isAuthenticated }: { posts: Post[]; i
         </div>
 
         <div className="showcase-footnote">
-          <span>CURATED EVERY FRIDAY / BY QIONGZHI COMMUNITY</span>
+          <span>CURATED EVERY FRIDAY / BY CIJIAN COMMUNITY</span>
           <span>看到值得被看见的实践？</span>
           <Link href="/new">投稿 <Icon name="i-arrow-up-right" /></Link>
         </div>

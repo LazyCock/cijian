@@ -39,7 +39,7 @@ export function AuthForm({ mode, next }: { mode: "login" | "register"; next: str
 
   return (
     <div className="auth-card">
-      <h2>{isLogin ? "回到你的工作流" : "加入穹智"}</h2>
+      <h2>{isLogin ? "回到你的工作流" : "加入此见"}</h2>
       <p>{isLogin ? "登录后继续参与讨论、申请任务与管理协作。" : "创建账号，发布实践，也可以接下真实项目。"}</p>
       <form className="form-stack" onSubmit={submit}>
         {!isLogin && (

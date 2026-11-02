@@ -15,7 +15,7 @@ export default function LearnPage() {
     <div className="wide-shell">
       <section className="learn-hero">
         <div className="learn-copy">
-          <div className="eyebrow">QIONGZHI ACADEMY / 学习中心</div>
+          <div className="eyebrow">CIJIAN ACADEMY / 学习中心</div>
           <h1>学会用 AI，<br /><span>更像一个方法。</span></h1>
           <p>不追逐每一个新工具，而是建立一套可以迁移的工作方法。从提示词、工作流到真实项目，和 12,860 位实践者一起，把知识用起来。</p>
           <form className="learn-search" action="/search" method="get">
@@ -27,7 +27,7 @@ export default function LearnPage() {
         </div>
         <div className="learn-stage" aria-hidden="true">
           <div className="course-poster">
-            <div className="poster-brand"><span>QIONGZHI ACADEMY®</span><span>2026 / SPRING</span></div>
+            <div className="poster-brand"><span>CIJIAN ACADEMY®</span><span>2026 / SPRING</span></div>
             <h3>让 AI<br />成为你的<br /><em>工作方法。</em></h3>
             <div className="poster-sub">FROM PROMPT TO DELIVERY</div>
             <div className="poster-bottom"><span>07 DAYS</span><b>1,280 LEARNERS</b></div>

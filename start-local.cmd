@@ -1,12 +1,12 @@
 @echo off
 setlocal
-title Qiongzhi Local Server
+title CIJIAN Local Server
 cd /d "%~dp0"
 
 set "PATH=%LOCALAPPDATA%\pnpm\bin;%PATH%"
 
 echo.
-echo  QIONGZHI - local start
+echo  CIJIAN - local start
 echo  ---------------------
 echo.
 
