@@ -4,6 +4,15 @@
 
 cijianai.com, www.cijianai.com {
 	encode zstd gzip
+
+	log {
+		output file C:/work/cijian/logs/caddy-access.log {
+			roll_size 50MiB
+			roll_keep 5
+		}
+		format console
+	}
+
 	reverse_proxy 127.0.0.1:3000 {
 		header_up Host {host}
 	}

@@ -4,6 +4,7 @@ title CIJIAN Local Server
 cd /d "%~dp0"
 
 set "PATH=%LOCALAPPDATA%\pnpm\bin;%PATH%"
+if not exist "logs" mkdir "logs"
 
 echo.
 echo  CIJIAN - local start
@@ -47,14 +48,15 @@ echo  Mode: %MODE%
 echo  URL:  http://localhost:3000
 echo.
 
+echo [%date% %time%] starting %MODE% >> "logs\app.log"
 start "" /b powershell -NoProfile -WindowStyle Hidden -Command "Start-Sleep -Seconds 4; Start-Process 'http://localhost:3000'"
 
 if /i "%MODE%"=="dev" (
-  call pnpm dev
+  powershell -NoProfile -Command "& pnpm dev *>&1 | Tee-Object -FilePath 'logs\app.log' -Append"
 ) else (
-  call pnpm start
+  powershell -NoProfile -Command "& pnpm start *>&1 | Tee-Object -FilePath 'logs\app.log' -Append"
 )
 
 echo.
-echo  Server stopped.
+echo  Server stopped. Log: %CD%\logs\app.log
 pause
