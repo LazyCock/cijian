@@ -4,13 +4,13 @@ export function BrandMark({ className }: { className?: string }) {
       <path
         fill="currentColor"
         fillRule="evenodd"
-        d="M84.37 69 A42 42 0 1 1 84.37 27 L73.98 33 A30 30 0 1 0 73.98 63 Z"
+        d="M87.95 57.27 A42 30 0 1 1 87.95 38.73 L76.53 42.44 A30 18 0 1 0 76.53 53.56 Z"
       />
       <path
-        d="M48 28 V56 C48 62 43 66 37 66 C32 66 28 63 26 59"
+        d="M48 38 V52 C48 56 45 58 41 58 C38 58 36 57 34 55"
         fill="none"
         stroke="currentColor"
-        strokeWidth="9"
+        strokeWidth="6"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
