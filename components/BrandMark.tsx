@@ -10,7 +10,7 @@ export function BrandMark({ className }: { className?: string }) {
         fill="currentColor"
         d="M48.7 32 C50.5 38 51 43 51 48 C51 53.4 50.2 58.5 47.7 64 C45.4 58.5 44.6 53.4 44.6 48 C44.6 43 45.2 38 46.9 32 Z"
       />
-      <path d="M47.7 63.5 C46 62.5 44 61 42.5 59" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+
     </svg>
   );
 }
