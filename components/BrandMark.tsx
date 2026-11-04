@@ -4,15 +4,11 @@ export function BrandMark({ className }: { className?: string }) {
       <path
         fill="currentColor"
         fillRule="evenodd"
-        d="M87.95 57.27 A42 30 0 1 1 87.95 38.73 L76.53 42.44 A30 18 0 1 0 76.53 53.56 Z"
+        d="M84.37 69 A42 42 0 1 1 84.37 27 L73.98 33 A30 30 0 1 0 73.98 63 Z"
       />
       <path
-        d="M48 38 V52 C48 56 45 58 41 58 C38 58 36 57 34 55"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        fill="currentColor"
+        d="M48 33 L58 37 L51 39 L51 53 C51 58 48 61 44 61 C40 61 37 59 36 55 L40 54 C41 56 42 58 45 57 C47 56 47 54 46 51 L45 39 L38 38 Z"
       />
     </svg>
   );
