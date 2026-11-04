@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Avatar } from "./Avatar";
+import { BrandMark } from "./BrandMark";
 import { Icon } from "./Icon";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -66,7 +67,7 @@ export function SiteHeader({ user }: { user: HeaderUser | null }) {
       <header className={`topbar ${scrolled ? "scrolled" : ""}`}>
         <div className="topbar-inner">
           <Link className="brand" href="/" aria-label="此见首页">
-            <span className="logo-mark"><Icon name="i-moon" /></span>
+            <span className="logo-mark"><BrandMark /></span>
             <span className="brand-copy"><span className="brand-name">此见</span><span className="brand-en">CIJIAN</span></span>
           </Link>
 

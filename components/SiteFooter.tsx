@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Icon } from "./Icon";
+import { BrandMark } from "./BrandMark";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-brand">
-        <span className="logo-mark"><Icon name="i-moon" /></span>
+        <span className="logo-mark"><BrandMark /></span>
         <span>此见 CIJIAN · AI 应用与协作社区</span>
       </div>
       <div className="footer-links">
