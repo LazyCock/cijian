@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { PhoneAuthForm } from "./PhoneAuthForm";
 
 export function AuthForm({ mode, next }: { mode: "login" | "register"; next: string }) {
   const router = useRouter();
@@ -11,6 +12,7 @@ export function AuthForm({ mode, next }: { mode: "login" | "register"; next: str
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [method, setMethod] = useState<"email" | "phone">("email");
   const isLogin = mode === "login";
 
   async function submit(event: React.FormEvent) {
@@ -41,7 +43,14 @@ export function AuthForm({ mode, next }: { mode: "login" | "register"; next: str
     <div className="auth-card">
       <h2>{isLogin ? "回到你的工作流" : "加入此见"}</h2>
       <p>{isLogin ? "登录后继续参与讨论、申请任务与管理协作。" : "创建账号，发布实践，也可以接下真实项目。"}</p>
-      <form className="form-stack" onSubmit={submit}>
+      {isLogin && (
+        <div className="auth-tabs">
+          <button type="button" className={`auth-tab ${method === "email" ? "active" : ""}`} onClick={() => setMethod("email")}>邮箱登录</button>
+          <button type="button" className={`auth-tab ${method === "phone" ? "active" : ""}`} onClick={() => setMethod("phone")}>手机登录</button>
+        </div>
+      )}
+      {isLogin && method === "phone" && <PhoneAuthForm next={next} />}
+      <form className="form-stack" onSubmit={submit} style={isLogin && method === "phone" ? { display: "none" } : undefined}>
         {!isLogin && (
           <div className="field">
             <label htmlFor="name">怎么称呼你</label>
@@ -59,10 +68,12 @@ export function AuthForm({ mode, next }: { mode: "login" | "register"; next: str
         {error && <p className="form-error">{error}</p>}
         <button className="btn btn-dark" type="submit" disabled={loading}>{loading ? "请稍候…" : isLogin ? "登录" : "创建账号"}</button>
       </form>
-      <div className="auth-switch">
-        {isLogin ? <>还没有账号？<Link href={`/register?next=${encodeURIComponent(next)}`}>立即注册</Link></> : <>已经有账号？<Link href={`/login?next=${encodeURIComponent(next)}`}>去登录</Link></>}
-      </div>
-      {isLogin && <div className="auth-demo"><b>演示账号</b><br />demo@qiongzhi.ai / Qiongzhi2026!</div>}
+      {(!isLogin || method === "email") && (
+        <div className="auth-switch">
+          {isLogin ? <>还没有账号？<Link href={`/register?next=${encodeURIComponent(next)}`}>立即注册</Link></> : <>已经有账号？<Link href={`/login?next=${encodeURIComponent(next)}`}>去登录</Link></>}
+        </div>
+      )}
+      {isLogin && method === "email" && <div className="auth-demo"><b>演示账号</b><br />demo@qiongzhi.ai / Qiongzhi2026!</div>}
     </div>
   );
 }

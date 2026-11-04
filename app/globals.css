@@ -4286,3 +4286,11 @@ a.profile-tab{text-decoration:none}
   .logo-mark{width:26px!important;height:26px!important}
   .logo-mark svg{width:24px!important;height:24px!important}
 }
+/* phone login */
+.auth-tabs{display:flex;gap:6px;margin:14px 0 12px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.auth-tab{flex:1;border:0;border-radius:999px;background:transparent;color:var(--muted);padding:8px 10px;font-size:11px;cursor:pointer}
+.auth-tab.active{background:var(--ink);color:var(--bg)}
+.phone-code-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.phone-devcode{margin:0;padding:10px 12px;border-radius:8px;background:rgba(217,250,91,.12);color:var(--ink);font-size:11px;line-height:1.5}
+.phone-devcode b{font-family:ui-monospace,SFMono-Regular,monospace;letter-spacing:.12em}
+.auth-phone-note{margin:0;text-align:center;color:var(--muted);font-size:10px;line-height:1.5}

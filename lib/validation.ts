@@ -14,6 +14,17 @@ export const loginSchema = z.object({
   password: z.string().min(1).max(128),
 });
 
+export const phoneSchema = z.string().trim().regex(/^1[3-9]\d{9}$/, "请输入正确的手机号");
+
+export const sendPhoneCodeSchema = z.object({
+  phone: phoneSchema,
+});
+
+export const phoneLoginSchema = z.object({
+  phone: phoneSchema,
+  code: z.string().regex(/^\d{6}$/, "验证码应为 6 位数字"),
+});
+
 const mediaItemSchema = z.object({
   id: z.string().uuid(),
   kind: z.enum(["image", "video"]),

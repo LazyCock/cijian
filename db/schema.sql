@@ -130,6 +130,21 @@ CREATE TABLE IF NOT EXISTS idempotency_keys (
 );
 CREATE INDEX IF NOT EXISTS idempotency_created_idx ON idempotency_keys (created_at);
 
+ALTER TABLE users ADD COLUMN IF NOT EXISTS phone text;
+CREATE UNIQUE INDEX IF NOT EXISTS users_phone_key ON users (phone) WHERE phone IS NOT NULL;
+
+CREATE TABLE IF NOT EXISTS phone_codes (
+  id uuid PRIMARY KEY,
+  phone text NOT NULL,
+  code_hash text NOT NULL,
+  expires_at timestamptz NOT NULL,
+  attempts integer NOT NULL DEFAULT 0,
+  consumed boolean NOT NULL DEFAULT false,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS phone_codes_phone_idx ON phone_codes (phone, created_at DESC);
+CREATE INDEX IF NOT EXISTS phone_codes_expiry_idx ON phone_codes (expires_at);
+
 CREATE TABLE IF NOT EXISTS audit_log (
   id uuid PRIMARY KEY,
   actor_id uuid REFERENCES users(id) ON DELETE SET NULL,
